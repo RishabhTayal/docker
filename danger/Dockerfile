@@ -9,10 +9,6 @@ LABEL "com.github.actions.description"="Run Danger"
 LABEL "com.github.actions.icon"="alert-triangle"
 LABEL "com.github.actions.color"="yellow"
 
-RUN apk update \
- && apk add git \
- && rm -rf /var/cache/apk/*
-
-RUN bundle install
+CMD "bundle install"
 
 CMD "bundle exec danger"
