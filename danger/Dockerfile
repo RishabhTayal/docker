@@ -1,7 +1,18 @@
-FROM python
-WORKDIR /app
-ADD . /app
-RUN pip install -r requirements.txt
-EXPOSE 80
-ENV NAME world
-CMD [“python”, “app.py”]
+FROM ruby:2.5-alpine
+
+LABEL "repository"="https://github.com/rishabhtayal/docker"
+LABEL "homepage"="https://github.com/rishabhtayal/docker"
+LABEL "maintainer"="<Rishabh Tayal> rtayal11@gmail.com"
+
+LABEL "com.github.actions.name"="Danger"
+LABEL "com.github.actions.description"="Run Danger"
+LABEL "com.github.actions.icon"="alert-triangle"
+LABEL "com.github.actions.color"="yellow"
+
+RUN apk update \
+ && apk add git \
+ && rm -rf /var/cache/apk/*
+
+RUN bundle install
+
+CMD "bundle exec danger"
