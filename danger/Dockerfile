@@ -9,6 +9,7 @@ LABEL "com.github.actions.description"="Run Danger"
 LABEL "com.github.actions.icon"="alert-triangle"
 LABEL "com.github.actions.color"="yellow"
 
-CMD "bundle install"
+RUN "gem install danger"
+RUN "gem install danger-swiftlint"
 
-CMD "bundle exec danger"
+CMD "danger"
