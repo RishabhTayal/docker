@@ -9,6 +9,14 @@ LABEL "com.github.actions.description"="Run Danger"
 LABEL "com.github.actions.icon"="alert-triangle"
 LABEL "com.github.actions.color"="yellow"
 
-RUN gem install danger
+RUN apt-get update -qq && apt-get install -y build-essential p7zip unzip
 
-CMD "danger"
+ENV APP_HOME /myapp
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+ADD ./Gemfile $APP_HOME/Gemfile
+ADD Gemfile.lock $APP_HOME/Gemfile.lock
+
+RUN bundle install
+CMD bundle exec danger
